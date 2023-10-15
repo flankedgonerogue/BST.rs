@@ -16,7 +16,7 @@ impl Node {
         }
 
         let node_representation = if prefix == "" { "─── " } else if is_tail { "└── " } else { "┌── " };
-        info!("{}{}{}", prefix, node_representation, self.data);
+        println!("{}{}{}", prefix, node_representation, self.data);
 
         if let Some(ref left) = self.left {
             left.pretty_print(format!("{}{}   ", prefix, if is_left_bar_needed { "│" } else { " " }), true, false, left.right.is_some());
@@ -154,7 +154,11 @@ impl BinarySearchTree {
     // Print formatted
     fn pretty_print(&self) {
         debug!("Starting to pretty print BST with Root {}", self.root.as_ref().unwrap().data);
+        println!("{:-^50}", "");
+        println!("{:^50}", "BST List");
+        println!("{:-^50}", "");
         self.root.as_ref().unwrap().pretty_print("".to_string(), false, false, false);
+        println!("{:-^50}", "");
         debug!("Done pretty printing BST with Root {}", self.root.as_ref().unwrap().data);
     }
 }
