@@ -164,3 +164,59 @@ fn read_line() -> String {
     std::io::stdin().read_line(&mut line).unwrap();
     return line.trim().parse::<String>().unwrap();
 }
+
+
+fn main() {
+    TermLogger::init(
+        LevelFilter::Warn,
+        Config::default(),
+        TerminalMode::Mixed,
+        ColorChoice::Auto
+    ).unwrap();
+    debug!("Start of program");
+
+    let mut line : String;
+
+    println!("Enter root for BST:");
+    line = read_line();
+    let mut bst = BinarySearchTree::new(line.parse::<i32>().unwrap());
+
+    loop {
+        println!("Select an option:");
+        println!("    1. Insert a node");
+        println!("    2. Delete a node");
+        println!("    3. Search for a node");
+        println!("    4. Print BST");
+        println!("    5. Exit");
+
+        line = read_line();
+
+        match line.as_str() {
+            "1" => {
+                println!("Enter node data:");
+                line = read_line();
+                bst.insert(line.parse::<i32>().unwrap_or(0));
+            }
+            "2" => {
+                println!("Enter node data:");
+                line = read_line();
+                bst.delete(line.parse::<i32>().unwrap_or(0));
+            }
+            "3" => {
+                println!("Enter node data:");
+                line = read_line();
+                if bst.search(line.parse::<i32>().unwrap_or(0)) {
+                    println!("{} found!", line);
+                } else {
+                    println!("{} not found!", line);
+                }
+            }
+            "4" => {
+                bst.pretty_print();
+            }
+            "5" => { break }
+            _ => { continue }
+        }
+    }
+    debug!("End of program");
+}
