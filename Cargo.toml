@@ -1,5 +1,5 @@
 [package]
-name = "BST"
+name = "bst"
 version = "0.1.0"
 description = "A binary search tree implementation in rust with pretty printing"
 edition = "2021"
